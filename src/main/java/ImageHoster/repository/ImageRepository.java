@@ -61,6 +61,23 @@ public class ImageRepository {
     }
 
     //The method creates an instance of EntityManager
+    //Executes JPQL query to fetch the image from the database with corresponding image id and title
+    //Returns the image in case the image is found in the database
+    //Returns null if no image is found in the database
+    public Image getImageByIdTitle(int imageId, String title) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Image> typedQuery = em.createQuery("SELECT i from Image i where i.id =:imageId and i.title =:title", Image.class);
+            typedQuery.setParameter("imageId", imageId);
+            typedQuery.setParameter("title", title);
+            return typedQuery.getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+
+    //The method creates an instance of EntityManager
     //Executes JPQL query to fetch the image from the database with corresponding id
     //Returns the image fetched from the database
     public Image getImage(Integer imageId) {
