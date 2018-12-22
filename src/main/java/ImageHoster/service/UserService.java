@@ -32,4 +32,16 @@ public class UserService {
         }
     }
 
+    public boolean checkPassword(String passwordEntered) {
+        if (! passwordEntered.matches("/[0-9]/"))
+            return false;
+        if (! passwordEntered.matches("/[a-z]/"))
+            return false;
+        if (passwordEntered.matches("/[A-Z]/"))
+            return false;
+        if (passwordEntered.matches("/[%!#&*@$^()-{},./?]/"))
+            return false;
+
+        return true;
+    }
 }
