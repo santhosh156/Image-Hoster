@@ -51,6 +51,11 @@ public class Image {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Tag> tags = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    private Comments comment;
+    //private List<Comments> comments = new ArrayList<>();
+
     public Image() {
     }
 
@@ -68,8 +73,6 @@ public class Image {
         this.description = description;
         this.date = date;
     }
-
-
 
     public Integer getId() {
         return id;
@@ -125,5 +128,13 @@ public class Image {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Comments getComments() {
+        return comment;
+    }
+
+    public void setComments(Comments comments) {
+        this.comment = comments;
     }
 }
